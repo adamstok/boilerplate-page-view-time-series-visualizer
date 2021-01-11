@@ -8,7 +8,8 @@ register_matplotlib_converters()
 df = pd.read_csv('fcc-forum-pageviews.csv')
 
 # Clean data
-df = None
+df = df[(df['value'] >= df['value'].max() * 0.025)
+        & (df['value'] <= df['value'] * 0.975)]
 
 
 def draw_line_plot():
