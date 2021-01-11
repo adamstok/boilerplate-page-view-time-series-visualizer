@@ -5,7 +5,7 @@ from pandas.plotting import register_matplotlib_converters
 register_matplotlib_converters()
 
 # Import data (Make sure to parse dates. Consider setting index column to 'date'.)
-df = pd.read_csv('fcc-forum-pageviews.csv')
+df = pd.read_csv('fcc-forum-pageviews.csv', parse_dates=['date'])
 
 # Clean data
 df = df[(df['value'] >= df['value'].max() * 0.025)
@@ -14,6 +14,8 @@ df = df[(df['value'] >= df['value'].max() * 0.025)
 
 def draw_line_plot():
     # Draw line plot
+
+    fig = plt.plot(df['date'], df['value'])
 
     # Save image and return fig (don't change this part)
     fig.savefig('line_plot.png')
