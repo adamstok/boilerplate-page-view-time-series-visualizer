@@ -8,8 +8,8 @@ register_matplotlib_converters()
 df = pd.read_csv('fcc-forum-pageviews.csv', parse_dates=['date'])
 
 # Clean data
-df = df[(df['value'] >= df['value'].quantile(0.025))]
-        & (df['value'] <= df['value'].quantile(0.975))]
+df = df[(df['value'] >= df['value'].quantile(0.025)) &
+        (df['value'] <= df['value'].quantile(0.975))]
 
 
 def draw_line_plot():
@@ -34,7 +34,7 @@ def draw_bar_plot():
 
     # Draw bar plot
 
-    fig = df_bar.plot(kind='bar', figsize=(15, 10), legend=True)
+    fig = df_bar.plot(kind='bar', figsize=(15, 10), legend=True).figure
     plt.xlabel('Years')
     plt.ylabel('Average Page Views')
     plt.legend(labels=['January', 'February', 'March', 'April', 'May', 'June', 'July',
