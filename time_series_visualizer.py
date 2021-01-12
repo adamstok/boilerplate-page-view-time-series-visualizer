@@ -9,7 +9,7 @@ df = pd.read_csv('fcc-forum-pageviews.csv', parse_dates=['date'])
 
 # Clean data
 df = df[(df['value'] >= df['value'].max() * 0.025)
-        & (df['value'] <= df['value'] * 0.975)]
+        & (df['value'] <= df['value'].max() * 0.975)]
 
 
 def draw_line_plot():
