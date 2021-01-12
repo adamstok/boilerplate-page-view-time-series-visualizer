@@ -51,6 +51,8 @@ def draw_box_plot():
     df_box.reset_index(inplace=True)
     df_box['year'] = [d.year for d in df_box.date]
     df_box['month'] = [d.strftime('%b') for d in df_box.date]
+    df_box["months"] = df_box["date"].dt.month
+    df_box = df_box.sort_values(by='months')
 
     # Draw box plots (using Seaborn)
     fig, (ax1, ax2) = plt.subplots(1, 2)
