@@ -8,8 +8,8 @@ register_matplotlib_converters()
 df = pd.read_csv('fcc-forum-pageviews.csv', parse_dates=['date'])
 
 # Clean data
-df = df[(df['value'] >= df['value'].max() * 0.025)
-        & (df['value'] <= df['value'].max() * 0.975)]
+df = df[(df['value'] >= df['value'].quantile(0.025))]
+        & (df['value'] <= df['value'].quantile(0.975))]
 
 
 def draw_line_plot():
@@ -56,7 +56,13 @@ def draw_box_plot():
     fig, (ax1, ax2) = plt.subplots(1, 2)
 
     ax1 = sns.boxplot(x=df['date'].dt.year, y=df['value'])
+    ax1.set_xlabel('Year')
+    ax1.set_ylabel('Page Views')
+    ax1.set_title('Year-wise Box Plot (Trend)')
     ax2 = sns.boxplot(x=df_box['date'].dt.month, y=df_box['value'])
+    ax2.set_xlabel('Month')
+    ax2.set_ylabel('Page Views')
+    ax2.set_title('Month-wise Box Plot (Seasonality)')
 
     # Save image and return fig (don't change this part)
     fig.savefig('box_plot.png')
